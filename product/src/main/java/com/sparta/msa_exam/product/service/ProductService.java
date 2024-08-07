@@ -27,4 +27,11 @@ public class ProductService {
                 .map(ProductMapper::toDto)
                 .toList();
     }
+
+    public ProductDto getProduct(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() ->
+                new IllegalArgumentException("상품 아이디가 올바르지 않습니다. : " + productId));
+
+        return ProductMapper.toDto(product);
+    }
 }
