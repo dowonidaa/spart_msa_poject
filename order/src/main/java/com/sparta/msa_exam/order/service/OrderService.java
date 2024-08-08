@@ -87,13 +87,9 @@ public class OrderService {
         List<ProductDto> products = productClient.getProducts();
         List<Long> productIds = dto.getProductIds();
 
-        List<Long> list = products.stream()
+        return products.stream()
                 .map(ProductDto::getProductId)
                 .filter(productIds::contains)
                 .toList();
-        for (Long l : list) {
-            log.info("{}",l);
-        }
-        return list;
     }
 }
