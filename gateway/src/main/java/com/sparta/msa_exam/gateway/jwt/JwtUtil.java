@@ -47,10 +47,11 @@ public class JwtUtil {
             }
             log.info("#####payload :: " + claims);
             exchange.getRequest().mutate()
-                    .header("X-User-Id", claims.get("user_id").toString())
+                    .header("X-User-Id", claims.get("username").toString())
                     .build();
             return true;
         } catch (Exception e) {
+            log.info(e.getMessage());
             return false;
         }
     }
