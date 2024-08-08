@@ -14,17 +14,17 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public OrderDto create(@RequestBody OrderDto dto, HttpServletResponse response) {
+    public OrderDto create(@RequestBody OrderDto dto) {
         return orderService.create(dto);
     }
 
     @GetMapping("/{orderId}")
-    public OrderDto getOrder(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
+    public OrderDto getOrder(@PathVariable("orderId") Long orderId) {
         return orderService.getOrder(orderId);
     }
 
     @PutMapping("/{orderId}")
-    public OrderDto update(@PathVariable("orderId") Long orderId, Long productId, HttpServletResponse response) {
+    public OrderDto update(@PathVariable("orderId") Long orderId,@RequestParam Long productId) {
         return orderService.update(orderId, productId);
     }
 }

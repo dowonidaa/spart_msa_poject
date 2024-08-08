@@ -6,6 +6,8 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 @Component
@@ -15,8 +17,9 @@ public class ServerPortAspect {
     @Value("${server.port}")
     private String serverPort;
 
-    @AfterReturning(value = "execution(* com.sparta.msa_exam.order.controller.OrderController.*(..))", returning = "response")
-    public void addServerPortHeader(HttpServletResponse response) {
+    @AfterReturning(pointcut = "execution(* com.sparta.msa_exam.order.controller.OrderController.*(..))")
+    public void addServerPortHeader() {
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
         log.info("ServerPortAspect!!");
         response.setHeader("Server_Port", serverPort);
     }
