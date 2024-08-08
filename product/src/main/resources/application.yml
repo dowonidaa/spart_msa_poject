@@ -1,4 +1,23 @@
+server:
+  port: 19093
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
+management:
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+  tracing:
+    sampling:
+      probability: 1.0
+
+
 spring:
+  config:
+    activate:
+      on-profile: dev
   application:
     name: product-service
   data:
@@ -17,18 +36,14 @@ spring:
       ddl-auto: create
     defer-datasource-initialization: true
     show-sql: true
-server:
-  port: 19093
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:19090/eureka/
-
-management:
-  zipkin:
-    tracing:
-      endpoint: "http://localhost:9411/api/v2/spans"
-  tracing:
-    sampling:
-      probability: 1.0
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://<RDS 주소>:3306/eat?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    password: 1234
+    username: root
