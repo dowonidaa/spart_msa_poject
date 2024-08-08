@@ -4,7 +4,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:19090/eureka/
-
 management:
   zipkin:
     tracing:
@@ -15,35 +14,14 @@ management:
 
 
 spring:
-  config:
-    activate:
-      on-profile: dev
-  application:
-    name: product-service
   data:
     redis:
       host: localhost
       username: default
       password: systempass
       port: 6379
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/msa
-    username: sa
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
-    show-sql: true
+  application:
+    name: product-service
 
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://<RDS 주소>:3306/eat?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
-    password: 1234
-    username: root
+
+

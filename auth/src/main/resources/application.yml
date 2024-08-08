@@ -19,23 +19,3 @@ spring:
       port: 6379
       username: default
       password: systempass
-  config:
-    activate:
-      on-profile: dev
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/msa
-    username: sa
-    password:
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://<RDS 주소>:3306/eat?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
