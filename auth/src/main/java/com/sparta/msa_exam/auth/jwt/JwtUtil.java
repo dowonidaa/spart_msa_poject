@@ -1,14 +1,11 @@
 package com.sparta.msa_exam.auth.jwt;
 
 import com.sparta.msa_exam.auth.repo.UserRepository;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;

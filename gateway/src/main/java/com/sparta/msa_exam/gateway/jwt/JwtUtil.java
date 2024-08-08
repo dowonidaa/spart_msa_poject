@@ -18,8 +18,6 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @Value("${service.jwt.access-expiration}")
-    private Long accessExpiration;
 
     @Value("${service.jwt.secret-key}")
     private String secretKey;

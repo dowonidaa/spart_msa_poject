@@ -14,8 +14,8 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping
-    public String sigIn(@RequestParam("user_id") String userId) {
+    @GetMapping("/signIn")
+    public String signIn(@RequestParam("user_id") String userId) {
         return authService.signIn(userId);
     }
 }
