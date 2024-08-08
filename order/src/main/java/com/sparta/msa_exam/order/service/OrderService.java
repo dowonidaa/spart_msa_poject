@@ -11,6 +11,7 @@ import com.sparta.msa_exam.order.repo.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,10 +42,10 @@ public class OrderService {
         return OrderMapper.toDto(order);
     }
 
-
+    @Cacheable(cacheNames = "orderCache", key = "args[0]")
     public OrderDto getOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() ->
-                new IllegalArgumentException("주문 아이디가 올바르지 않습니다. : " + orderId));
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
         return OrderMapper.toDto(order);
     }
 
@@ -52,10 +53,10 @@ public class OrderService {
     public OrderDto update(Long orderId, Long productId) {
         ProductDto product = productClient.getProduct(productId);
         if (product == null) {
-            throw new IllegalArgumentException("상품 아이디가 올바르지 않습니다 : " + productId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         Order order = orderRepository.findById(orderId).orElseThrow(() ->
-                new IllegalArgumentException("주문 아이디가 올바르지 않습니다. : " + orderId));
+                        new ResponseStatusException(HttpStatus.NOT_FOUND));
         OrderItem orderItem = OrderItem.builder().productId(productId).order(order).build();
         orderItemRepository.save(orderItem);
         order.saveOrderItem(orderItem);
