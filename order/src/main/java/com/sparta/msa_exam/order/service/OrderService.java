@@ -9,8 +9,10 @@ import com.sparta.msa_exam.order.mapper.OrderMapper;
 import com.sparta.msa_exam.order.repo.OrderItemRepository;
 import com.sparta.msa_exam.order.repo.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,7 +28,11 @@ public class OrderService {
     @Transactional
     public OrderDto create(OrderDto dto) {
         Order order = orderRepository.save(OrderMapper.toEntityWithName(dto));
-        createOrderItems(existProductIds(dto), order);
+        List<Long> productIds = existProductIds(dto);
+        if (productIds.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        createOrderItems(productIds, order);
         return OrderMapper.toDto(order);
     }
 
