@@ -5,6 +5,9 @@ import com.sparta.msa_exam.product.entity.Product;
 import com.sparta.msa_exam.product.mapper.ProductMapper;
 import com.sparta.msa_exam.product.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +18,13 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    @CacheEvict(cacheNames = "productAllCache",allEntries = true)
     public ProductDto create(ProductDto dto) {
         Product product = productRepository.save(ProductMapper.toEntity(dto));
         return ProductMapper.toDto(product);
     }
 
-
+    @Cacheable(cacheNames = "productAllCache", key = "methodName")
     public List<ProductDto> getProducts() {
         return productRepository.findAll()
                 .stream()
