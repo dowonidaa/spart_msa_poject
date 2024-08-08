@@ -9,6 +9,8 @@ import com.sparta.msa_exam.order.mapper.OrderMapper;
 import com.sparta.msa_exam.order.repo.OrderItemRepository;
 import com.sparta.msa_exam.order.repo.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class OrderService {
 
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final ProductClient productClient;
@@ -29,10 +32,12 @@ public class OrderService {
     public OrderDto create(OrderDto dto) {
         Order order = orderRepository.save(OrderMapper.toEntityWithName(dto));
         List<Long> productIds = existProductIds(dto);
+
         if (productIds.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         createOrderItems(productIds, order);
+
         return OrderMapper.toDto(order);
     }
 
@@ -64,7 +69,6 @@ public class OrderService {
 
 
 
-
     private void createOrderItems(List<Long> productIds, Order savedOrder) {
         for (Long productId : productIds) {
             OrderItem orderItem = OrderItem.builder()
@@ -82,8 +86,13 @@ public class OrderService {
         List<ProductDto> products = productClient.getProducts();
         List<Long> productIds = dto.getProductIds();
 
-        return products.stream()
-                .map(ProductDto::getProductId).filter(productIds::contains)
+        List<Long> list = products.stream()
+                .map(ProductDto::getProductId)
+                .filter(productIds::contains)
                 .toList();
+        for (Long l : list) {
+            log.info("{}",l);
+        }
+        return list;
     }
 }

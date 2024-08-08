@@ -18,7 +18,7 @@ public class OrderController {
         return orderService.create(dto);
     }
 
-    @GetMapping("/order/{orderId}")
+    @GetMapping("/{orderId}")
     public OrderDto getOrder(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
         return orderService.getOrder(orderId);
     }
