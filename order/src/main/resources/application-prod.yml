@@ -8,4 +8,3 @@ spring:
     hibernate:
       ddl-auto: none
     defer-datasource-initialization: true
-    show-sql: true
