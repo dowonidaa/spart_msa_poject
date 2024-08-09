@@ -16,17 +16,17 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ProductDto create(@RequestBody ProductDto productDto, HttpServletResponse response) {
+    public ProductDto create(@RequestBody ProductDto productDto) {
         return productService.create(productDto);
     }
 
     @GetMapping
-    public List<ProductDto> getProducts(HttpServletResponse response) {
+    public List<ProductDto> getProducts() {
         return productService.getProducts();
     }
 
     @GetMapping("/{productId}")
-    public ProductDto getProduct(@PathVariable("productId") Long productId, HttpServletResponse response) {
+    public ProductDto getProduct(@PathVariable("productId") Long productId) {
         return productService.getProduct(productId);
     }
 

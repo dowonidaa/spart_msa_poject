@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://<RDS IP주소>:3306/msa?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    password: 1234
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    defer-datasource-initialization: true
