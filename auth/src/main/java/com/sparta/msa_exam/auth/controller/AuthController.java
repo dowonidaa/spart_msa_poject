@@ -1,12 +1,10 @@
 package com.sparta.msa_exam.auth.controller;
 
-import com.sparta.msa_exam.auth.dto.AuthDto;
+import com.sparta.msa_exam.auth.dto.SignUpDto;
 import com.sparta.msa_exam.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,8 +13,16 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/signIn")
-    public AuthDto signIn(@RequestParam("user_id") String userId) {
-        return new AuthDto(authService.signIn(userId));
+    @PostMapping("/signUp")
+    public ResponseEntity<?> signUp(@RequestBody SignUpDto dto) {
+        return ResponseEntity.ok(authService.signUp(dto));
     }
+
+    @PostMapping("/verification")
+    public String verify(String username) {
+        return authService.verification(username);
+    }
+
+
+
 }

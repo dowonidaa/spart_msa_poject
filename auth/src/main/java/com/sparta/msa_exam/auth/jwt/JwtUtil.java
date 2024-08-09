@@ -1,35 +1,27 @@
 package com.sparta.msa_exam.auth.jwt;
 
-import com.sparta.msa_exam.auth.repo.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JwtUtil {
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer ";
+    private final SecretKey secretKey;
     @Value("${spring.application.name}")
     private String issuer;
-
     @Value("${service.jwt.access-expiration}")
     private Long accessExpiration;
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String BEARER_PREFIX = "Bearer ";
-
-
-    private final SecretKey secretKey;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    public JwtUtil(UserRepository userRepository, PasswordEncoder passwordEncoder, @Value("${service.jwt.secret-key}")String secretKey) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public JwtUtil(@Value("${service.jwt.secret-key}") String secretKey) {
         this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
 
     }
@@ -43,7 +35,6 @@ public class JwtUtil {
                 .signWith(secretKey)
                 .compact();
     }
-
 
 
 }
