@@ -32,13 +32,13 @@ public class LocalJwtAuthenticationFilter implements GlobalFilter {
         }
 
         String token = jwtUtil.getJwtFromHeader(exchange.getRequest());
-        String username = authService.verify(jwtUtil.getUsername(token));
 
-        if (token == null || !jwtUtil.validateToken(token) || username == null) {
+        if (token == null || !jwtUtil.validateToken(token)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             log.info("UNAUTHORIZED");
             return exchange.getResponse().setComplete();
         }
+        String username = authService.verify(jwtUtil.getUsername(token));
 
         exchange.getRequest().mutate().header("username", username).build();
         log.info("token {}",token);
