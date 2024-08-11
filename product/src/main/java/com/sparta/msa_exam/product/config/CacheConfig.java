@@ -10,6 +10,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
+import java.time.Duration;
+
 @Configuration
 @EnableCaching
 public class CacheConfig {
@@ -20,6 +22,7 @@ public class CacheConfig {
                 .defaultCacheConfig()
                 .disableCachingNullValues()
                 .computePrefixWith(CacheKeyPrefix.simple())
+                .entryTtl(Duration.ofHours(2))
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.java())
                 );
