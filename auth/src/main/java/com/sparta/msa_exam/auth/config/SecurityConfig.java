@@ -1,6 +1,6 @@
 package com.sparta.msa_exam.auth.config;
 
-import com.sparta.msa_exam.auth.filter.JwtAuthenticationFilter;
+import com.sparta.msa_exam.auth.jwt.filter.JwtAuthenticationFilter;
 import com.sparta.msa_exam.auth.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

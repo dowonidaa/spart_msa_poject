@@ -1,8 +1,7 @@
 package com.sparta.msa_exam.product.controller;
 
-import com.sparta.msa_exam.product.dto.ProductDto;
-import com.sparta.msa_exam.product.service.ProductService;
-import jakarta.servlet.http.HttpServletResponse;
+import com.sparta.msa_exam.product.application.dto.ProductDto;
+import com.sparta.msa_exam.product.application.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

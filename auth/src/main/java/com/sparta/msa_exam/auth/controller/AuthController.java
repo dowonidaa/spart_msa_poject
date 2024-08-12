@@ -1,7 +1,7 @@
 package com.sparta.msa_exam.auth.controller;
 
-import com.sparta.msa_exam.auth.dto.SignUpDto;
-import com.sparta.msa_exam.auth.service.AuthService;
+import com.sparta.msa_exam.auth.application.dto.SignUpDto;
+import com.sparta.msa_exam.auth.application.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

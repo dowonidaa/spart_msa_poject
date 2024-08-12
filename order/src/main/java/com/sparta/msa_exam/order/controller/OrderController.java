@@ -1,8 +1,7 @@
 package com.sparta.msa_exam.order.controller;
 
-import com.sparta.msa_exam.order.dto.OrderDto;
-import com.sparta.msa_exam.order.service.OrderService;
-import jakarta.servlet.http.HttpServletResponse;
+import com.sparta.msa_exam.order.application.dto.OrderDto;
+import com.sparta.msa_exam.order.application.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

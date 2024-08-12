@@ -1,7 +1,7 @@
 package com.sparta.msa_exam.gateway.filter;
 
 import com.sparta.msa_exam.gateway.jwt.JwtUtil;
-import com.sparta.msa_exam.gateway.service.AuthService;
+import com.sparta.msa_exam.gateway.application.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

@@ -1,6 +1,6 @@
 package com.sparta.msa_exam.auth.jwt;
 
-import com.sparta.msa_exam.auth.entity.User;
+import com.sparta.msa_exam.auth.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

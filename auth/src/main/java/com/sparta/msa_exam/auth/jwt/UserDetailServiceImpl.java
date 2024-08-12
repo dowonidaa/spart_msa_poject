@@ -1,7 +1,7 @@
 package com.sparta.msa_exam.auth.jwt;
 
-import com.sparta.msa_exam.auth.entity.User;
-import com.sparta.msa_exam.auth.repo.UserRepository;
+import com.sparta.msa_exam.auth.domain.User;
+import com.sparta.msa_exam.auth.domain.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
